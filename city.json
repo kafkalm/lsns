@@ -1,0 +1,49 @@
+[
+    {
+        "name": "City_1",
+        "local_product_names": ["item_1"],
+        "inventory": {
+            "product_quantity": {
+                "item_1": 10
+            },
+            "product_info": {
+                "item_1": {
+                    "name": "item_1",
+                    "price": 100
+                },
+                "item_2": {
+                    "name": "item_2",
+                    "price": 200
+                },
+                "item_3": {
+                    "name": "item_3",
+                    "price": 300
+                }
+            }
+        }
+    },
+    {
+        "name": "City_2",
+        "local_product_names": ["item_2", "item_3"],
+        "inventory": {
+            "product_quantity": {
+                "item_2": 20,
+                "item_3": 30
+            },
+            "product_info": {
+                "item_1": {
+                    "name": "item_1",
+                    "price": 300
+                },
+                "item_2": {
+                    "name": "item_2",
+                    "price": 100
+                },
+                "item_3": {
+                    "name": "item_3",
+                    "price": 250
+                }
+            }
+        }
+    }
+]
