@@ -1,5 +1,9 @@
 package model
 
+import (
+	"fmt"
+)
+
 type Order struct {
 	ProductName string `json:"product_name"`
 	BuyPrice    int    `json:"buy_price"`
@@ -9,6 +13,10 @@ type Order struct {
 
 func (o Order) Profit() int {
 	return (o.SellPrice - o.BuyPrice) * o.Quantity
+}
+
+func (o Order) KeyInfo() string {
+	return fmt.Sprintf("%s 买入: %d", o.ProductName, o.Quantity)
 }
 
 func CalculateOrdersProfit(orders []Order) int {

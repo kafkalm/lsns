@@ -2,8 +2,6 @@ package model
 
 import (
 	"lsns/util"
-
-	"golang.org/x/exp/slices"
 )
 
 type Inventory struct {
@@ -70,16 +68,22 @@ func (i Inventory) CalMaxProfit(trainMaxLoad int, sellInventory Inventory) (prof
 		products = append(products, i.ProductInfo[productName])
 	}
 
-	slices.SortFunc[[]Product](products, func(a, b Product) int {
-		aProfit := sellInventory.ProductInfo[a.Name].Price - a.Price
-		bProfit := sellInventory.ProductInfo[b.Name].Price - b.Price
-		if aProfit < bProfit {
-			return 1
-		} else if aProfit > bProfit {
-			return -1
-		}
-		return 0
-	})
+	// slices.SortFunc[[]Product](products, func(a, b Product) int {
+	// 	aProfit := sellInventory.ProductInfo[a.Name].Price - a.Price
+	// 	bProfit := sellInventory.ProductInfo[b.Name].Price - b.Price
+	// 	if aProfit < bProfit {
+	// 		return 1
+	// 	} else if aProfit > bProfit {
+	// 		return -1
+	// 	}
+	// 	return 0
+	// })
+
+	util.Sort[Product](products, func(a, b Product) bool {
+			aProfit := sellInventory.ProductInfo[a.Name].Price - a.Price
+			bProfit := sellInventory.ProductInfo[b.Name].Price - b.Price
+			return aProfit > bProfit
+		})
 
 	curLoad := 0
 	orders = []Order{}
@@ -91,12 +95,16 @@ func (i Inventory) CalMaxProfit(trainMaxLoad int, sellInventory Inventory) (prof
 		if q == 0 {
 			continue
 		}
-		orders = append(orders, Order{
+		order := Order{
 			ProductName: product.Name,
 			BuyPrice:    product.Price,
 			SellPrice:   sellInventory.ProductInfo[product.Name].Price,
 			Quantity:    q,
-		})
+		}
+		if order.BuyPrice == order.SellPrice {
+			continue
+		}
+		orders = append(orders, order)
 		curLoad += q
 	}
 

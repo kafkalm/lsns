@@ -58,19 +58,25 @@ func CalBestProfitRoute(trainMaxLoad int, cities []model.City, round bool, profi
 				profit := profitWight(i2jProfit + j2iProfit, cities[i], cities[j])
 				if profit > maxProfit {
 					maxProfit = profit
-					maxCityOrders[cities[i].Name] = i2jOrders
-					maxCityOrders[cities[j].Name] = j2iOrders
+					maxCityOrders = map[string][]model.Order{
+						cities[i].Name: i2jOrders,
+						cities[j].Name: j2iOrders,
+					}
 				}
 			} else {
 				profit := profitWight(i2jProfit, cities[i], cities[j])
 				if  profit > maxProfit {
 					maxProfit = profit
-					maxCityOrders[cities[i].Name] = i2jOrders
+					maxCityOrders = map[string][]model.Order{
+						cities[i].Name: i2jOrders,
+					}
 				}
 				profit = profitWight(j2iProfit, cities[j], cities[i])
 				if  profit > maxProfit {
 					maxProfit = profit
-					maxCityOrders[cities[j].Name] = j2iOrders
+					maxCityOrders = map[string][]model.Order{
+						cities[j].Name: j2iOrders,
+					}
 				}
 			}
 		}

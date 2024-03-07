@@ -43,9 +43,9 @@ func (c City) Replenish(times int) {
 	}
 	for _, productName := range c.LocalProductNames {
 		if times > 0 {
-			c.Inventory.MultiProduct(c.Inventory.ProductInfo[productName], times)
+			c.Inventory.MultiProduct(c.Inventory.ProductInfo[productName], times+1)
 		} else {
-			c.Inventory.DivideProduct(c.Inventory.ProductInfo[productName], -times)
+			c.Inventory.DivideProduct(c.Inventory.ProductInfo[productName], -times+1)
 		}
 	}
 }
